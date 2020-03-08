@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://ww.thymeleaf.org">
+<head>
+    <title>Categories List</title>
+</head>
+<body>
+    <header>
+        <h1>Review Catagories</h1>
+    </header>
+    <!-- Can add img here if you want -->
+    <!-- <img th:src="@{'insert img'}"/> -->
+
+    <ul>
+        <li th:each="category: ${catagories}"><a th:href="|/catagory?id=${catagory.id}|" 
+            th:text="${category.name}"></a></li>
+    </ul>
+</body>
+<footer>
+    <small>Created by Flex-Code Spring 2020 Team</small>
+</footer>
+</html>
