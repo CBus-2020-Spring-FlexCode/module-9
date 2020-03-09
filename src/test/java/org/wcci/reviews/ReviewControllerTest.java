@@ -22,6 +22,7 @@ public class ReviewControllerTest {
 	
 	@Mock
 	private Review review;
+	Long reviewId;
 	@Mock
 	private Review anotherReview;
 	
@@ -78,6 +79,35 @@ public class ReviewControllerTest {
 		
 		underTest.findAllCategories(model);
 		verify(model).addAttribute("categories", allCategories);
+	}
+	
+	@Test
+	public void shouldAddAdditionalReviewToModel() {
+		String categoryName = "catgory name";
+		Category newCategory = categoryRepo.findByName(categoryName);
+		
+		String reviewName = "new review";
+		String reviewDescription = "new review description";
+		
+		underTest.addReview(reviewName, reviewDescription, categoryName);
+		Review newReview = new Review(reviewName, reviewDescription, newCategory);
+		when(reviewRepo.save(newReview)).thenReturn(newReview);
+		
+	}
+	
+	@Test
+	public void shouldRemoveReviewFromModelByName() {
+		String reviewName = review.getName();
+		when(reviewRepo.findByName(reviewName)).thenReturn(review);
+		underTest.deleteReviewByName(reviewName);
+		
+		verify(reviewRepo).delete(review);
+	}
+	
+	@Test
+	public void shouldRemoveReviewFromModelById() {
+		underTest.deleteReviewById();
+		verify(reviewRepo).deleteById(reviewId);
 	}
 
 }

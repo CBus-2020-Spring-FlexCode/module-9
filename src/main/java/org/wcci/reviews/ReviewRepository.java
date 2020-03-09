@@ -8,4 +8,8 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
 
 	Collection<Review> findByCategoryContains(Category category);
 
+	Review findByName(String reviewName);
+
+	void deleteById(Review reviewId);
+
 }

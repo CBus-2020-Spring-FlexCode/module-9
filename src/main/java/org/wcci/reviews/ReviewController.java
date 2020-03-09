@@ -18,6 +18,8 @@ public class ReviewController {
 	@Resource
 	private CategoryRepository categoryRepo;
 
+	private Long reviewId;
+
 	@RequestMapping("/show-review")
 	public String findReview(@RequestParam(value = "id") long Id, Model model) {
 		Optional<Review> review = reviewRepo.findById(Id);
@@ -47,6 +49,43 @@ public class ReviewController {
 		model.addAttribute("categories", categoryRepo.findAll());
 		return "categories";
 
+	}
+
+	@RequestMapping("/add-review")
+	public String addReview(String reviewName, String reviewDescription, String categoryName) {
+		
+		Category category = categoryRepo.findByName(categoryName);
+		if (category == null) {
+			category = new Category(categoryName);
+			categoryRepo.save(category);
+		}
+		
+		Review newReview = reviewRepo.findByName(reviewName);
+		
+		if (newReview == null) {
+			newReview = new Review(reviewName, reviewDescription, category);
+			reviewRepo.save(newReview);
+		}
+		return "redirect:/show-reviews";
+	}
+
+	@RequestMapping("/delete-review")
+	public String deleteReviewByName(String reviewName) {
+		
+		if (reviewRepo.findByName(reviewName) != null) {
+			Review deletedReview = reviewRepo.findByName(reviewName);
+			reviewRepo.delete(deletedReview);
+		}
+		
+		return "redirect:/show-reviews";
+		
+	}
+
+	public String deleteReviewById() {
+		reviewRepo.deleteById(reviewId);
+		
+		return "redirect:/show-reviews";
+		
 	}
 
 }
