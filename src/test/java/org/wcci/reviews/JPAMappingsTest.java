@@ -3,6 +3,8 @@ package org.wcci.reviews;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -21,6 +23,9 @@ public class JPAMappingsTest {
 	@Resource
 	private CategoryRepository categoryRepo;
 	
+	@Resource
+	private TagRepository tagRepo;
+	
 	@Test
 	public void shouldSaveAndLoadCategory() {
 		Category category = new Category("Health");
@@ -30,6 +35,19 @@ public class JPAMappingsTest {
 		entityManager.clear();
 		
 		assertThat(category.getName(), is("Health"));
+	}
+	
+	@Test
+	public void shouldSaveAndLoadTag() {
+		Tag tag = tagRepo.save(new Tag("Health"));
+		long tagId = tag.getId(); 
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Optional<Tag> result = tagRepo.findById(tagId);
+		result.get();
+		assertThat(tag.getName(), is("tag"));
 	}
 
 }
