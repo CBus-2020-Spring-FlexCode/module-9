@@ -10,6 +10,6 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
 
 	Review findByName(String reviewName);
 
-	void deleteById(Review reviewId);
+	Review deleteById(Review reviewId);
 
 }
