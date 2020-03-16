@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A list of Reviews</title>
+  </head>
+  <body>
+      <header>
+          <h1>A list of all Reviews</h1>
+      </header>
+
+      <main>
+
+        <div th:each="review: ${reviews}">
+            <li>
+                <a th:href="@{/review(id=@{review.id})}" th:text="${review.title}"></a>
+            </li>
+        </div>
+        <section id="categoriesLink">
+            <a href="http://localhost:8080/categories">To Categories</a>
+        </section>
+
+        </div>
+      </main>
+  </body>
+
+  <footer>
+      <small>Copyright WCCI 2020</small>
+  </footer>
+</html>
