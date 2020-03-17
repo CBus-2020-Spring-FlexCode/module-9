@@ -35,19 +35,19 @@
         </div>
 
         <div class="review_content">
-            <label>Enter Review Content</label>
+            <label class="content-label">Enter Review Content</label>
             <!--input controller-->
-            <input id="content" type="text" name="toDo " onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';" />
+            <textarea class="content-input" type="text" name="toDo"></textarea>
         </div>
 
         <div>
-            <button th:formaction="@{}">add review</button>
+            <button th:formaction="@{}">Add Review</button>
         </div>
     </form>
 
     <form>
         <div>
-        <label>Enter Review:</label>
+        <label>Delete Review:</label>
         <input type="text" name="toDo " />
         </div>
 
