@@ -32,6 +32,12 @@ public class ReviewControllerTest {
 	private Category category;
 	@Mock
 	private Category anotherCategory;
+	
+	@Mock 
+	private Tag tag;
+	
+	@Mock
+	private Tag anotherTag;
 
 	@Mock
 	private CategoryRepository categoryRepo;
@@ -79,6 +85,24 @@ public class ReviewControllerTest {
 		underTest.findAllCategories(model);
 		verify(model).addAttribute("categories", allCategories);
 	}
+	
+	@Test
+	public void shouldAddSingleTagToModel() {
+		long tagId = 1;
+		when(tagRepo.findById(tagId)).theReturn(Optional.of(tag));
+		
+		underTest.findTag(tagId, model);
+		verify(model).addAttribute("Tags", tag);
+	}
+	
+	@Test
+	public void shouldAddAllTagsToModel() {
+		Collection<Tag> allTags = Arrays.asList(tag, anotherTag);
+		when(tagRepo.findAll()).thenReturn(allTags);
+		
+		underTest.findAllTags(model);
+		verify(model).addAttribute("tags", allTags);
+	}
 
 	@Test
 	public void shouldAddAdditionalReviewToModel() {
@@ -108,5 +132,6 @@ public class ReviewControllerTest {
 		underTest.deleteReviewById();
 		verify(reviewRepo).deleteById(reviewId);
 	}
-
+	
+	
 }
