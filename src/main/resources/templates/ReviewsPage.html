@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<title>Review List</title>
+</head>
+
+<div class = "container">
+<body>
+    <div class="title">
+	<header>
+		<h1>Reviews</h1>
+    </header>
+</div>
+	<main>
+	<div class="logo">
+	<img th:src="@{images/Reviews.jpg}"/>
+	</div>
+		<ul>
+            <li th:each="review: ${reviews}"><a th:href="|/review/${review.id}|" 
+                th:text="${review.title}"></a></li>
+        </ul>
+	</main>
+    <form method=POST>
+        <div>
+        <label>Enter Category:</label>
+        <!--input controller-->
+        <input type="text" name="toDo " />
+        </div>
+
+        <div>
+            <label>Enter Review Title:</label>
+            <!--input controller-->
+            <input type="text" name="toDo " />
+        </div>
+
+        <div class="review_content">
+            <label>Enter Review Content</label>
+            <!--input controller-->
+            <input id="content" type="text" name="toDo " onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';" />
+        </div>
+
+        <div>
+            <button th:formaction="@{}">add review</button>
+        </div>
+    </form>
+
+    <form>
+        <div>
+        <label>Enter Review:</label>
+        <input type="text" name="toDo " />
+        </div>
+
+        <div>
+            <button th:formaction="@{}">Delete Review</button>
+        </div>
+    </form>
+	<footer>
+		<p><a href="/catagories">Go Back</a></p>
+	</footer>
+</body>
+</div>
+</html>
