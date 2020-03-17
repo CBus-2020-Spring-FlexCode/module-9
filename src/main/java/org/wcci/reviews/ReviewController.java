@@ -17,6 +17,9 @@ public class ReviewController {
 
 	@Resource
 	private CategoryRepository categoryRepo;
+	
+	@Resource
+	private TagRepository tagRepo;
 
 	private Long reviewId;
 
@@ -88,6 +91,22 @@ public class ReviewController {
 
 		return "redirect:/show-reviews";
 
+	}
+
+	@RequestMapping("/show-tag")
+	public String findTag(long tagId, Model model) {
+		Optional<Tag> tag = tagRepo.findById(Id);
+		model.addAttribute("Tags", tag.get());
+		model.addAttribute("Reviews", reviewRepo.findByCategoryContains(tag.get()));
+		return "tag";
+		
+	}
+
+	@RequestMapping("/show-tags")
+	public String findAllTags(Model model) {
+		model.addAttribute("tags", tagRepo.findAll());
+		return "tags";
+		
 	}
 
 }
