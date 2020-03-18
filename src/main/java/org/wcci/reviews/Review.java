@@ -3,9 +3,6 @@ package org.wcci.reviews;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Collection;
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,12 +14,10 @@ import javax.persistence.OneToMany;
 @Entity
 public class Review {
 	
-
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-
 	private String title;
 	private String image;
 	@Lob
@@ -30,6 +25,10 @@ public class Review {
 	
 	@ManyToMany
 	private Collection<Category> categories;
+	
+	//Implement once Tag class has been merged
+//	@ManyToMany
+//	private Collection<Tag> tags;
 	
 	//Possibly name, depends on how others name it
 	public String getTitle() {
@@ -52,12 +51,13 @@ public class Review {
 		
 	}
 	
-	//Add category once class is created "Category...category"
+	//Add tags once class is created "Tag...tags"
 	public Review(String title, String image, String content, Category...categories) {
 		this.title = title;
 		this.image = image;
 		this.content = content;
 		this.categories = new HashSet<>(Arrays.asList(categories));
+		//this.tags = new HashSet<>(Arrays.asList(tags));
 	}
 	
 	public Long getId() {

@@ -14,8 +14,9 @@ public class ReviewPopulator implements CommandLineRunner {
 	@Resource
 	private CategoryRepository categoryRepo;
 	
-	@Resource
-	private TagRepository tagRepo;
+	//Implement once Tag Repository has been merged
+//	@Resource
+//	private TagRepository tagRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
