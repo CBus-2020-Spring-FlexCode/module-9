@@ -39,12 +39,23 @@ public class MockMVCTest {
 	
 	@Mock
 	private Category categoryTwo;
+
+	//Uncomment once Tag class is included in master
+//	@Mock
+//	private Tag tagOne;
+//	
+//	@Mock
+//	private Tag tagTwo;
 	
 	@MockBean
 	private ReviewRepository reviewRepo;
 	
 	@MockBean
 	private CategoryRepository categoryRepo;
+
+	//Uncomment once TagRepository is included in Master
+//	@MockBean
+//	private TagRepository tagRepo;
 	
 	@Test
 	public void shouldBeOkForSingleReview() throws Exception {
@@ -118,12 +129,12 @@ public class MockMVCTest {
 
 	@Test
 	public void shouldRouteToAllCategories() throws Exception {
-		mvc.perform(get("categories")).andExpect(view().name(is("categories")));
+		mvc.perform(get("/categories")).andExpect(view().name(is("categories")));
 	}
 	
 	@Test
 	public void shouldBeOkForAllCategories() throws Exception {
-		mvc.perform(get("categories")).andExpect(status().isOk());
+		mvc.perform(get("/categories")).andExpect(status().isOk());
 	}
 	
 	@Test
@@ -134,7 +145,51 @@ public class MockMVCTest {
 		mvc.perform(get("/categories")).andExpect(model().attribute("categories", is(allCategories)));
 	}
 	
-	
+	//Add tag tests once Tag.java and TagRepository.java are included
+//	@Test
+//	public void shouldBeOkForSingleTag() throws Exception {
+//		long testTagId = 1;
+//		when(tagRepo.findById(testTagId)).thenReturn(Optional.of(tagOne));
+//		mvc.perform(get("/tag?id=1")).andExpect(status().isOk());
+//	}
+//	
+//	@Test
+//	public void shouldRouteToSingleTag() throws Exception {
+//		long testTagId = 1;
+//		when(tagRepo.findById(testTagId)).thenReturn(Optional.of(tagOne));
+//		mvc.perform(get("/tag?id=1")).andExpect(view().name(is("tag")));
+//	}
+//	
+//	@Test
+//	public void shouldNotBeOkForSingleTag() throws Exception {
+//		mvc.perform(get("/tag?id=1")).andExpect(status().isNotFound());
+//	}
+//	
+//	@Test
+//	public void shouldPutSingleTagIntoModel() throws Exception {
+//		when(tagRepo.findById(1L)).thenReturn(Optional.of(tagOne));
+//		
+//		mvc.perform(get("/tag?id=1")).andExpect(model().attribute("tags", is(tagOne)));
+//	}
+//	
+//	@Test
+//	public void shouldRouteToAllTags() throws Exception {
+//		mvc.perform(get("/tags")).andExpect(view().name(is("tags")));
+//	}
+//	
+//	@Test
+//	public void shouldBeOkForAllTags() throws Exception {
+//		mvc.perform(get("/tags")).andExpect(status().isOk());		
+//	}
+//	
+//	@Test
+//	public void shouldPutAllTagsIntoModel() throws Exception {
+//		Collection<Category> allTags = Arrays.asList(tagOne, tagTwo);
+//		when(tagRepo.findAll()).thenReturn(allTags);
+//		
+//		mvc.perform(get("/tags")).andExpect(model().attribute("tags", is(allTags)));
+//	}
+
 
 }
 
